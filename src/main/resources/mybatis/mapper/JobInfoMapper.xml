@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jd.springboot.mapper.JobInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jd.springboot.domain.JobInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="pin" jdbcType="VARCHAR" property="pin" />
+    <result column="service_full_path" jdbcType="VARCHAR" property="serviceFullPath" />
+    <result column="method_name" jdbcType="VARCHAR" property="methodName" />
+    <result column="method_param_type" jdbcType="VARCHAR" property="methodParamType" />
+    <result column="method_param_value" jdbcType="VARCHAR" property="methodParamValue" />
+    <result column="alias" jdbcType="VARCHAR" property="alias" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="protocol" jdbcType="VARCHAR" property="protocol" />
+    <result column="timeout" jdbcType="INTEGER" property="timeout" />
+    <result column="jsf_async" jdbcType="INTEGER" property="jsfAsync" />
+    <result column="sharding_num" jdbcType="INTEGER" property="shardingNum" />
+    <result column="job_cron" jdbcType="VARCHAR" property="jobCron" />
+    <result column="sharding_param" jdbcType="VARCHAR" property="shardingParam" />
+    <result column="job_status" jdbcType="INTEGER" property="jobStatus" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="job_environment" jdbcType="BIT" property="jobEnvironment" />
+  </resultMap>
+
+  <select id="customQuery" resultMap="BaseResultMap">
+    select * from job_info
+    where 1 =1
+    <if test="jobName != null and jobName !=''">and job_name like concat('%',#{jobName},'%')</if>
+    <if test="appName != null and appName !=''">and app_name like concat('%',#{appName},'%')</if>
+  </select>
+
+  <select id="testQueryList" resultType="com.jd.springboot.domain.JobInfo">
+    select * from job_info
+    where 1 = 1
+    <if test="query.idList != null and query.idList.size > 0">
+      and id in
+      <foreach collection="query.idList" item="item" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>成功！</h1>
+    <!--th:text 将div里面的文本内容设置为 -->
+    <div th:text="${hello}">这是显示欢迎信息</div>
+    <select name="select" id="a">
+        <option value="" th:value="${l}" th:each="l : ${list}" th:selected="${l} == b">[[${l}]]</option>
+    </select>
+</body>
+</html>
